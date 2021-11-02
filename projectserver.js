@@ -11,18 +11,19 @@ var bodyParser = require("body-parser");
 // let reviews = require("./data/reviews.json");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-
+const uri =
+    "mongodb+srv://helen:RVayMVPaFrWYWQA1@moviedb.b6utl.mongodb.net/movieDB?retryWrites=true&w=majority";
 const store = new MongoDBStore({
-    uri: "mongodb://localhost:27017/moviedb",
+    uri: uri,
     collection: "mySessions",
 });
 //require("mongoose").set("debug", true);
-const { json, application } = require("express");
+const {json, application} = require("express");
 const mc = require("mongodb").MongoClient; // Access the database (Javascript version of mongo shell)
 
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost/moviedb", { useNewUrlParser: true });
+mongoose.connect(uri, {useNewUrlParser: true});
 //mongoose.set("debug", true);
 
 const User = require("./models/UserModel");
@@ -36,14 +37,14 @@ app.use(express.static("public"));
 
 app.use(express.static("other"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 app.use(
     session({
         secret: "secret",
-        cookie: { maxAge: 1200000 },
+        cookie: {maxAge: 1200000},
         rolling: true,
         store: store,
     })
@@ -69,14 +70,14 @@ app.get("/", [getRecMovies, sendHome]);
 function getRecMovies(req, res, next) {
     //let skip = (req.query.page - 1) * req.query.limit;
     if (req.session.user) {
-        User.findOne({ _id: req.session.user._id }).exec(function (err, user) {
+        User.findOne({_id: req.session.user._id}).exec(function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(500).send("error reading db");
             }
             user.recommendations = [];
 
-            Person.find({ followers: user._id }).exec(function (err, people) {
+            Person.find({followers: user._id}).exec(function (err, people) {
                 //console.log(people.moviesActed);
                 if (err) {
                     console.log(err);
@@ -102,16 +103,17 @@ function getRecMovies(req, res, next) {
                     //console.log(user.recommendations);
                 });
                 user.save();
-                Movie.find({ _id: { $in: user.recommendations } }).exec(
-                    function (err, result) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        //console.log(result);
-                        req.movies = result;
-                        next();
+                Movie.find({_id: {$in: user.recommendations}}).exec(function (
+                    err,
+                    result
+                ) {
+                    if (err) {
+                        console.log(err);
                     }
-                );
+                    //console.log(result);
+                    req.movies = result;
+                    next();
+                });
 
                 //console.log(user.recommendations.length);
             });
@@ -135,7 +137,7 @@ function getRecMovies(req, res, next) {
 
 function sendHome(req, res, next) {
     //console.log(req.movies);
-    res.render("pages/home", { movies: req.movies, session: req.session });
+    res.render("pages/home", {movies: req.movies, session: req.session});
 }
 
 function sendRecs(req, res, next) {
@@ -148,17 +150,17 @@ function sendRecs(req, res, next) {
     });
 }
 app.get("/login", function (req, res) {
-    res.render("pages/login", { session: req.session });
+    res.render("pages/login", {session: req.session});
 });
 app.get("/search", [queryParser, search, sendResults]);
 app.post("/login", login);
 
 app.get("/signup", function (req, res) {
-    res.render("pages/signup", { session: req.session });
+    res.render("pages/signup", {session: req.session});
 });
 app.get("/logout", logout);
 app.get("/advanced", function (req, res) {
-    res.render("pages/advancedsearch", { session: req.session });
+    res.render("pages/advancedsearch", {session: req.session});
 });
 
 function login(req, res, next) {
@@ -244,7 +246,7 @@ function search(req, res, next) {
         req.results = [];
 
         if (category === "movies") {
-            Movie.find({ Title: { $regex: q, $options: "i" } })
+            Movie.find({Title: {$regex: q, $options: "i"}})
                 .limit(req.query.limit)
                 .skip(skip)
                 .exec(function (err, result) {
@@ -255,7 +257,7 @@ function search(req, res, next) {
                     next();
                 });
         } else if (category === "people") {
-            Person.find({ name: { $regex: q, $options: "i" } })
+            Person.find({name: {$regex: q, $options: "i"}})
                 .limit(req.query.limit)
                 .skip(skip)
                 .exec(function (err, result) {
@@ -266,7 +268,7 @@ function search(req, res, next) {
                     next();
                 });
         } else if (category === "users") {
-            User.find({ name: { $regex: q, $options: "i" } })
+            User.find({name: {$regex: q, $options: "i"}})
                 .limit(req.query.limit)
                 .skip(skip)
                 .exec(function (err, result) {
@@ -301,10 +303,7 @@ function sendResults(req, res, next) {
 
 app.get("/getupdates", function (req, res, next) {
     if (req.session.user) {
-        User.findOne({ _id: req.session.user._id }).exec(function (
-            err,
-            result
-        ) {
+        User.findOne({_id: req.session.user._id}).exec(function (err, result) {
             if (err) {
                 console.log(err);
             }
@@ -321,7 +320,7 @@ app.get("/getupdates", function (req, res, next) {
 app.delete("/notifications", function (req, res) {
     //console.log("request received");
     if (req.session.user) {
-        User.findOne({ _id: req.session.user._id }).exec(function (err, user) {
+        User.findOne({_id: req.session.user._id}).exec(function (err, user) {
             if (err) {
                 console.log(err);
             }

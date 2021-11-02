@@ -170,7 +170,7 @@ app.get("/advanced", function (req, res) {
 });
 
 function login(req, res, next) {
-    let username = req.body.username;
+    let userName = req.body.username;
     let password = req.body.password;
 
     //console.log(req.body);
@@ -178,29 +178,26 @@ function login(req, res, next) {
         req.session.url = "/";
     }
 
-    User.findOne()
-        .where("username")
-        .regex(new RegExp(".*" + username + ".*", "i"))
-        .exec(function (err, result) {
-            if (err) {
-                //res.status(401).send("no user");
-                console.log(err);
-                return;
-            }
+    User.findOne({username: userName}).exec(function (err, result) {
+        if (err) {
+            //res.status(401).send("no user");
+            console.log(err);
+            return;
+        }
 
-            if (result === null) {
-                res.status(401).send("no user");
+        if (result === null) {
+            res.status(401).send("no user");
+        } else {
+            if (password === result.password) {
+                req.session.user = result;
+                //console.log(req.session);
+                //console.log("found" + result);
+                res.status(200).send("/users/" + result.id);
             } else {
-                if (password === result.password) {
-                    req.session.user = result;
-                    //console.log(req.session);
-                    //console.log("found" + result);
-                    res.status(200).send("/users/" + result.id);
-                } else {
-                    res.status(401).send("wrong password");
-                }
+                res.status(401).send("wrong password");
             }
-        });
+        }
+    });
 }
 
 function logout(req, res, next) {

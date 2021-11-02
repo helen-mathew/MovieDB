@@ -16,7 +16,6 @@ const uri =
     process.env.MONGODB_URI ||
     "mongodb+srv://helen:RVayMVPaFrWYWQA1@moviedb.b6utl.mongodb.net/moviedb?retryWrites=true&w=majority";
 
-console.log(process.env.MONGODB_URI);
 const store = new MongoDBStore({
     uri: uri,
     collection: "mySessions",
@@ -116,13 +115,15 @@ function getRecMovies(req, res, next) {
                     }
                     //console.log(result);
                     req.movies = result;
-                    next();
+                    //console.log(req.movies);
+                    if (req.movies.length !== 0) next(); //only go to sendHome if the rec array has something, otherwise render regular home page (following if statement)
                 });
 
                 //console.log(user.recommendations.length);
             });
         });
-    } else {
+    }
+    if (!req.session.user || !req.movies) {
         Movie.find()
             .populate("directorID")
             .populate("actorsIDs")
@@ -134,6 +135,7 @@ function getRecMovies(req, res, next) {
                 }
                 //res.send(movies[0].Poster)
                 req.movies = movies;
+                //console.log(req.movies[1]);
                 next();
             });
     }

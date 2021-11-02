@@ -12,7 +12,7 @@ const {count} = require("./models/MovieModel");
 const ReviewModel = require("./models/ReviewModel");
 //const ReviewModel = require("./models/ReviewModel");
 const uri =
-    "mongodb+srv://helen:RVayMVPaFrWYWQA1@moviedb.b6utl.mongodb.net/movieDB?retryWrites=true&w=majority";
+    "mongodb+srv://helen:RVayMVPaFrWYWQA1@moviedb.b6utl.mongodb.net/moviedb?retryWrites=true&w=majority";
 //clear the images folder on startup
 let maxUser = 100;
 let userList = [];

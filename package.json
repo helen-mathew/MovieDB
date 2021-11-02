@@ -1,22 +1,23 @@
 {
-  "name": "package",
-  "version": "1.0.0",
-  "description": "The search bar can be used from any page, however, at the moment, you can only search for movies. To do this, I used a form in the navbar.pug partial, which sends a GET request to the server with the search value as a query string.  Any of the words in the title can be used (for example just searching 'toy' would display toy story, 't' would display all the movies with a 't' in its title), cases are also ignored. However, I havent implemented searching by genre, year etc.",
-  "main": "logic.js",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "config.json": "^0.0.4",
-    "connect-mongodb-session": "^2.4.1",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "faker": "^5.1.0",
-    "mongoose": "^5.10.15",
-    "pug": "^3.0.2"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "helen",
-  "license": "ISC"
+    "name": "package",
+    "version": "1.0.0",
+    "description": "The search bar can be used from any page, however, at the moment, you can only search for movies. To do this, I used a form in the navbar.pug partial, which sends a GET request to the server with the search value as a query string.  Any of the words in the title can be used (for example just searching 'toy' would display toy story, 't' would display all the movies with a 't' in its title), cases are also ignored. However, I havent implemented searching by genre, year etc.",
+    "main": "logic.js",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "config.json": "^0.0.4",
+        "connect-mongodb-session": "^2.4.1",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "faker": "^5.1.0",
+        "mongoose": "^5.10.15",
+        "pug": "^3.0.2"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node projectserver.js"
+    },
+    "author": "helen",
+    "license": "ISC"
 }

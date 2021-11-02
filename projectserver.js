@@ -11,8 +11,7 @@ var bodyParser = require("body-parser");
 // let reviews = require("./data/reviews.json");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const uri =
-    "mongodb+srv://helen:RVayMVPaFrWYWQA1@moviedb.b6utl.mongodb.net/movieDB?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
 const store = new MongoDBStore({
     uri: uri,
     collection: "mySessions",

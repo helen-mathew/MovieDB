@@ -8,10 +8,11 @@ let users = require("./data/userdata.json");
 let reviews = require("./data/reviewdata.json");
 
 const faker = require("faker");
-const { count } = require("./models/MovieModel");
+const {count} = require("./models/MovieModel");
 const ReviewModel = require("./models/ReviewModel");
 //const ReviewModel = require("./models/ReviewModel");
-
+const uri =
+    "mongodb+srv://helen:RVayMVPaFrWYWQA1@moviedb.b6utl.mongodb.net/movieDB?retryWrites=true&w=majority";
 //clear the images folder on startup
 let maxUser = 100;
 let userList = [];
@@ -148,7 +149,7 @@ userList.forEach((user) => {
     }
 });
 
-mongoose.connect("mongodb://localhost/moviedb", { useNewUrlParser: true });
+mongoose.connect(uri, {useNewUrlParser: true});
 let db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function () {

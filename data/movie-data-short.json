@@ -1,0 +1,230 @@
+[
+    {
+        "id": 0,
+        "reviews": [0, 1],
+        "Title": "Toy Story",
+        "Year": 1995,
+        "Runtime": 81,
+        "Genre": "Animation, Adventure, Comedy, Family, Fantasy",
+        "Director": "John Lasseter",
+        "Actors": ["Tom Hanks", "Tim Allen", "Don Rickles", "Jim Varney"],
+        "Plot": "A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy's room.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BMDU2ZWJlMjktMTRhMy00ZTA5LWEzNDgtYmNmZTEwZTViZWJkXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_SX300.jpg",
+        "imdbID": "tt0114709",
+        "Type": "movie",
+        "actors": [0, 1, 2, 3],
+        "Writers": [
+            "John Lasseter",
+            "Pete Docter",
+            "Andrew Stanton",
+            "Joe Ranft",
+            "Joss Whedon",
+            "Joel Cohen",
+            "Alec Sokolow"
+        ]
+    },
+    {
+        "id": 1,
+        "reviews": [],
+        "Title": "Jumanji",
+        "Year": 1995,
+        "Runtime": 104,
+        "Genre": "Adventure, Comedy, Family, Fantasy",
+        "Director": "Joe Johnston",
+        "Actors": [
+            "Robin Williams",
+            "Jonathan Hyde",
+            "Kirsten Dunst",
+            "Bradley Pierce"
+        ],
+        "Plot": "When two kids find and play a magical board game, they release a man trapped in it for decades - and a host of dangers that can only be stopped by finishing the game.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BZTk2ZmUwYmEtNTcwZS00YmMyLWFkYjMtNTRmZDA3YWExMjc2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+        "imdbID": "tt0113497",
+        "Type": "movie",
+        "actors": [4, 5, 6, 7],
+        "Writers": [
+            "Jonathan Hensleigh",
+            "Greg Taylor",
+            "Jim Strain",
+            "Chris Van Allsburg"
+        ]
+    },
+    {
+        "id": 2,
+        "reviews": [],
+        "Title": "Grumpier Old Men",
+        "Year": 1995,
+        "Runtime": 101,
+        "Genre": "Comedy, Romance",
+        "Director": "Howard Deutch",
+        "Actors": [
+            "Walter Matthau",
+            "Jack Lemmon",
+            "Sophia Loren, Ann-Margret"
+        ],
+        "Plot": "John and Max resolve to save their beloved bait shop from turning into an Italian restaurant, just as its new female owner catches Max's attention.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BMjQxM2YyNjMtZjUxYy00OGYyLTg0MmQtNGE2YzNjYmUyZTY1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+        "imdbID": "tt0113228",
+        "Type": "movie",
+        "actors": [8, 9, 10],
+        "Writers": ["Mark Steven Johnson"]
+    },
+    {
+        "id": 3,
+        "reviews": [],
+        "Title": "Waiting to Exhale",
+        "Year": 1995,
+        "Runtime": 124,
+        "Genre": "Comedy, Drama, Romance",
+        "Director": "Forest Whitaker",
+        "Actors": [
+            "Whitney Houston",
+            "Angela Bassett",
+            "Loretta Devine",
+            "Lela Rochon"
+        ],
+        "Plot": "Based on Terry McMillan's novel, this film follows four very different African-American women and their relationships with the male gender.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BYzcyMDY2YWQtYWJhYy00OGQ2LTk4NzktYWJkNDYwZWJmY2RjXkEyXkFqcGdeQXVyMTA0MjU0Ng@@._V1_SX300.jpg",
+        "imdbID": "tt0114885",
+        "Type": "movie",
+        "actors": [11, 12, 13, 14],
+        "Writers": ["Terry McMillan", "Ronald Bass"]
+    },
+    {
+        "id": 4,
+        "reviews": [],
+        "Title": "Father of the Bride Part II",
+        "Year": 1995,
+        "Runtime": 106,
+        "Genre": "Comedy, Family, Romance",
+        "Director": "Charles Shyer",
+        "Actors": [
+            "Steve Martin",
+            "Diane Keaton",
+            "Martin Short",
+            "Kimberly Williams-Paisley"
+        ],
+        "Plot": "George Banks must deal not only with the pregnancy of his daughter, but also with the unexpected pregnancy of his wife.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BOTEyNzg5NjYtNDU4OS00MWYxLWJhMTItYWU4NTkyNDBmM2Y0XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+        "imdbID": "tt0113041",
+        "Type": "movie",
+        "actors": [15, 16, 17, 18],
+        "Writers": [
+            "`Albert Hackett",
+            "`Frances Goodrich",
+            "Nancy Meyers",
+            "Charles Shyer"
+        ]
+    },
+    {
+        "id": 5,
+        "reviews": [],
+        "Title": "Heat",
+        "Year": 1995,
+        "Runtime": 170,
+        "Genre": "Crime, Drama, Thriller",
+        "Director": "Michael Mann",
+        "Actors": ["Al Pacino", "Robert De Niro", "Val Kilmer", "Jon Voight"],
+        "Plot": "A group of professional bank robbers start to feel the heat from police when they unknowingly leave a clue at their latest heist.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BMDJjNWE5MTEtMDk2Mi00ZjczLWIwYjAtNzM2ZTdhNzcwOGZjXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_SX300.jpg",
+        "imdbID": "tt0113277",
+        "Type": "movie",
+        "actors": [19, 20, 21, 22],
+        "Writers": ["Micheal Mann"]
+    },
+    {
+        "id": 6,
+        "reviews": [],
+        "Title": "Sabrina",
+        "Year": 1995,
+        "Runtime": 127,
+        "Genre": "Comedy, Drama, Romance",
+        "Director": "Sydney Pollack",
+        "Actors": [
+            "Harrison Ford",
+            "Julia Ormond",
+            "Greg Kinnear",
+            "Nancy Marchand"
+        ],
+        "Plot": "An ugly duckling having undergone a remarkable change, still harbors feelings for her crush: a carefree playboy, but not before his business-focused brother has something to say about it.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BYjQ5ZjQ0YzQtOGY3My00MWVhLTgzNWItOTYwMTE5N2ZiMDUyXkEyXkFqcGdeQXVyNjUwMzI2NzU@._V1_SX300.jpg",
+        "imdbID": "tt0114319",
+        "Type": "movie",
+        "actors": [23, 24, 25, 26],
+        "Writers": [
+            "Samuel A. Taylor",
+            "Billy Wilder",
+            "Ernest Lehman",
+            "Barbara Benedek",
+            "David Rayfiel"
+        ]
+    },
+    {
+        "id": 7,
+        "reviews": [],
+        "Title": "Tom and Huck",
+        "Year": 1995,
+        "Runtime": 97,
+        "Genre": "Adventure, Comedy, Drama, Family, Romance, Western",
+        "Director": "Peter Hewitt",
+        "Actors": [
+            "Jonathan Taylor Thomas",
+            "Brad Renfro",
+            "Eric Schweig",
+            "Charles Rocket"
+        ],
+        "Plot": "Two best friends witness a murder and embark on a series of adventures in order to prove the innocence of the man wrongly accused of the crime.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BN2ZkZTMxOTAtMzg1Mi00M2U0LWE2NWItZDg4YmQyZjVkMDdhXkEyXkFqcGdeQXVyNTM5NzI0NDY@._V1_SX300.jpg",
+        "imdbID": "tt0112302",
+        "Type": "movie",
+        "actors": [27, 28, 29, 30],
+        "Writers": ["Mark Twain", "Stephen Sommers", "David Loughery"]
+    },
+    {
+        "id": 8,
+        "reviews": [],
+        "Title": "Sudden Death",
+        "Year": 1995,
+        "Runtime": 111,
+        "Genre": "Action, Crime, Thriller",
+        "Director": "Peter Hyams",
+        "Actors": [
+            "Jean-Claude Van Damme",
+            "Powers Boothe",
+            "Raymond J. Barry",
+            "Whittni Wright"
+        ],
+        "Plot": "A former fireman takes on a group of terrorists holding the Vice President and others hostage during the seventh game of the NHL Stanley Cup finals.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BN2NjYWE5NjMtODlmZC00MjJhLWFkZTktYTJlZTI4YjVkMGNmXkEyXkFqcGdeQXVyNDc2NjEyMw@@._V1_SX300.jpg",
+        "imdbID": "tt0114576",
+        "Type": "movie",
+        "actors": [31, 32, 33, 34],
+        "Writers": ["Karen Elise Baldwin", "Gene Quintano"]
+    },
+    {
+        "id": 9,
+        "reviews": [],
+        "Title": "GoldenEye",
+        "Year": 1995,
+        "Runtime": 130,
+        "Genre": "Action, Adventure, Thriller",
+        "Director": "Martin Campbell",
+        "Actors": [
+            "Pierce Brosnan",
+            "Sean Bean",
+            "Izabella Scorupco",
+            "Famke Janssen"
+        ],
+        "Plot": "Years after a friend and fellow 00 agent is killed on a joint mission, a secret space based weapons program known as \"GoldenEye\" is stolen. James Bond sets out to stop a Russian crime syndicate from using the weapon.",
+        "Poster": "https://m.media-amazon.com/images/M/MV5BMzk2OTg4MTk1NF5BMl5BanBnXkFtZTcwNjExNTgzNA@@._V1_SX300.jpg",
+        "imdbID": "tt0113189",
+        "Type": "movie",
+        "actors": [35, 36, 37, 38],
+        "Writers": [
+            "Ian Fleming",
+            "Michael France",
+            "Jeffrey Caine",
+            "Bruce Feirstein"
+        ]
+    }
+]

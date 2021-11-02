@@ -1,0 +1,93 @@
+head
+    include ../partials/header
+    
+    title #{user.name}
+
+    body    
+        include ../partials/navbar
+        .profileDiv
+            
+            .userinfo
+                
+
+                div
+                    h3 #{user.name}
+                    h5 @#{user.username}
+                    
+                    
+                    -if(session.user && (session.user.username===user.username)){
+                        -if(user.contributing===true){
+                            h6 Type of User: Contributing
+                        -}
+                        -else{
+                            h6 Type of User: Regular
+                        -}
+                        
+                        a(href="/users/"+user.id+"/edit") Edit Account
+                        br
+                        
+                    -}
+                    .follow
+                        a(href='/users/'+user.id+"/followers") Followers: #{user.followers.length}
+                        br
+                        a(href='/users/'+user.id+'/following') Following: #{user.following.users.length+user.following.people.length}
+
+                    #unfollowDiv
+                
+                    br
+                    -if(session.user&& !(session.user.username===user.username)){
+                       
+                        
+                        -if(session.user && (user.followers.includes(session.user._id))){
+                            
+                            a(href="/users/follow/"+user._id)
+                                button#followButton(name='followButton') Unfollow
+
+                                
+                            -}
+
+                        -else{
+                            a(href="/users/follow/"+user._id)
+                                button#followButton(name='followButton') Follow
+                        -}
+                    -}
+
+                    
+                    
+                    br
+
+            br
+            .reviews
+                h3 Reviews Made:
+                -if(user.reviews.length===0){
+                    h3 No reviews yet
+                -}
+                each review in user.reviews
+                    
+                    hr
+                    div.profilereview
+                        //-img(src=movie.Poster)
+                        div.review
+                            h4
+                                a(href="/movies/"+review.movie._id) #{review.movie.Title} 
+                        
+                            
+                            i.fas.fa-star(id='star')  
+                            |  #{review.rating}/10
+                            br
+
+                            br
+                            | #{review.review}
+                            
+                    hr
+
+            //- .createdmovies
+            //-     h3 Movies Created:
+            //-     -if(user.movies_added.length===0){
+            //-         | No movies added yet
+                    
+            //-     -}
+            //-     -if(loggedin && (userid===user.id) &&user.contributing===true){
+            //-         br
+            //-         a(href="/movies/create") Add a movie
+            //-         -}

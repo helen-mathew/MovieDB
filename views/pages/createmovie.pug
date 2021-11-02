@@ -1,0 +1,82 @@
+html(lang="en")
+    head
+        include ../partials/header
+        title Add A Movie
+    body
+        include ../partials/navbar
+        
+        form.createmovie()
+            -if(movie){
+                h2 Edit #{movie.Title}
+                | Movie Title:
+                input(type="text" name='title' id='title' value=movie.Title size='50')
+                | Year:
+                
+                input(type="text" name='year' id='year' value=movie.Year size='50')
+                | Genre:
+                
+                input(type="text" name='genre' id='genre' value=movie.Genres.join(", ") size='50')
+                | Runtime (in minutes):
+                
+                input(type="text" name='runtime' id='runtime' value=movie.Runtime size='50' )
+                | Director(s) (separated by comma):
+
+                -let dir = []
+                each d in movie.directors   
+                    -dir.push(d.name)
+                input(type="text", name="directors" id='directors' value=dir.join(", ") size='50')
+                | Writer(s) (separated by comma):
+            
+                -let wri = []
+                each p in movie.writers  
+                    -wri.push(p.name)
+                input(type="text", name="writers" id='writers' value=wri.join(", ") size='50')
+                | Actor(s) (separated by comma):
+                
+                -let act = []
+                each p in movie.actors 
+                    -act.push(p.name)
+                input(type="text", name="actors" id='actors' value=act.join(", ") size='50')
+                | Plot:
+                br
+                textarea#plot(cols="30", rows="10") #{movie.Plot}
+                br
+            
+                | Poster
+                input(type="text" id='poster' name='poster' value=movie.Poster size='50')
+                br
+                input#createmovie.submitbtn(type="button", onclick='edit()' value='Edit')
+            -}else{
+                h2 Add A Movie
+                | Movie Title:
+                input(type="text" name='title' id='title' size='50')
+                | Year:
+                
+                input(type="text" name='year' id='year' size='50')
+                | Genre:
+                
+                input(type="text" name='genre' id='genre' size='50')
+                | Runtime (in minutes):
+                
+                input(type="text" name='runtime' id='runtime' size='50')
+                | Director(s):
+            
+                input(type="text", name="directors" id='directors' size='50')
+                | Writer(s) (separated by comma):
+            
+                input(type="text", name="writers" id='writers' size='50')
+                | Actor(s) (separated by comma):
+                
+                input(type="text", name="actors" id='actors' size='50')
+                | Plot:
+                br
+                textarea#plot(name="plot", cols="30", rows="10")
+                br
+                | Poster
+                input(type="text" id='poster' name='poster' size='50')
+                br
+                input#createmovie.submitbtn(type="button", onclick='newmovie()' value='Create')
+            -}
+            //-button(type='submit') Submit
+
+        

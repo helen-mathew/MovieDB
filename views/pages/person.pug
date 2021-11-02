@@ -1,0 +1,106 @@
+html
+    head
+    include ../partials/header
+    title #{person.name}
+
+    body
+        include ../partials/navbar
+
+        .personDiv
+            br
+            h2 #{person.name}
+            br
+            #info
+                //-| #{followinglist}
+                
+                |Acted in: 
+                -if(person.moviesActed.length===0){
+                    | None
+                -}else{
+                    each m in person.moviesActed
+                        -if(person.moviesActed.indexOf(m)===person.moviesActed.length -1){
+                            a(href="/movies/"+m.id) #{m.Title}
+                        -}
+                        -else{
+                            a(href="/movies/"+m.id) #{m.Title}, 
+                        -}
+                -}
+                br
+                br
+
+                |Wrote: 
+                -if(person.moviesWrote.length===0){
+                    | None
+                -}else{
+                    each m in person.moviesWrote
+                        -if(person.moviesWrote.indexOf(m)===person.moviesWrote.length -1){
+                            a(href="/movies/"+m.id) #{m.Title}
+                        -}
+                        -else{
+                            a(href="/movies/"+m.id) #{m.Title}, 
+                        -}
+                -}
+                br
+                br
+
+                |Directed: 
+               
+                -if(person.moviesDirected.length===0){
+                    | None
+                -}else{
+                    each m in person.moviesDirected
+                        -if(person.moviesDirected.indexOf(m)===person.moviesDirected.length -1){
+                            a(href="/movies/"+m.id) #{m.Title}
+                        -}
+                        -else{
+                            a(href="/movies/"+m.id) #{m.Title}, 
+                        -} 
+                -}
+                br
+                br
+                
+                |Frequent collaborators: 
+                -if(person.collabs.length===0){
+                    | None
+                -}else{
+                each f in person.collabs
+                        -if(person.collabs.indexOf(f)===person.collabs.length -1){
+                            a(href="/people/"+f._id) #{f.name}
+                        -}
+                        -else{
+                            a(href="/people/"+f._id) #{f.name}, 
+                        -} 
+                    
+                -}
+                br
+                br
+            
+            
+            #unfollowDiv
+                //- each user in person.followers
+                //-     p #{user}
+                //-     p #{user._id==session.user._id}
+                //- p #{session.user._id}
+                //- p #{person.followers.includes(session.user)}
+                //- p #{JSON.stringify(session.user.following.people)}
+                //- p #{person.id}
+              
+                
+                -if(session.user && (person.followers.includes(session.user._id))){
+                   
+                    a(href="/people/follow/"+person.id)
+                        button#followButton(name='followButton') Unfollow
+
+                        
+                    -}
+
+                -else {
+                    a(href="/people/follow/"+person.id)
+                        button#followButton(name='followButton') Follow
+                -}
+
+                
+                
+                br
+            
+            

@@ -1,0 +1,62 @@
+nav()
+    div.logo
+        a(href='/')
+            img.logopic(src="/img/logo.png")
+        
+    form(action='/search' method='get')
+        //- a(href="/advanced") Advanced search page
+        
+        .searchbar
+            div.select
+                select#category(name="category")
+                    //- option(value="All") All
+                    option(value="movies") Movies
+                    option(value="people") People
+                    option(value="users") Users
+        
+            input(type='text' placeholder="Search..." id = "search" name="search")
+            
+        
+            button#searchIcon(type='submit' )
+                i.fas.fa-search
+        a(href="/advanced") Advanced search page
+
+        
+
+    
+    
+    -if(session.user){
+        
+        div.dropdown
+        
+            button.dropbtn.log(onclick='dropdown()') #{session.user.name.split(', ' )[0]}
+            div#usercontent.usercontent
+                a(href="/users/"+session.user._id) My Profile
+                a(href="/logout") Log Out
+                a(href="/users/"+session.user._id+"/notifications") Notifications
+                -if(session.user.contributing){
+                    a(href="/movies/create") Add A Movie
+                    a(href="/people/create") Add A Person
+                    
+                        
+
+                -}
+        //- li
+        //-     button.log(onclick="logout")
+        //-         a(href ='/logout') Sign Out
+        //- li
+        //-     button.log
+        //-         a(href ="/users/"+userid) My Profile
+    -}
+    -else{
+
+        div.dropdown
+        
+            button.log
+                a(href="/login") Log In
+    -}
+        //- li
+        //-     button.dark-btn(onclick='darkmode()') Dark/Light Mode
+            
+                
+        

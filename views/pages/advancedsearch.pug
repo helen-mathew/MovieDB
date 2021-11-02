@@ -1,0 +1,48 @@
+html(lang="en")
+    head
+       
+        title Advanced Search
+        include ../partials/header 
+    body
+
+        include ../partials/navbar 
+
+        .advancedsearch
+
+            form(action="/movies" method='get').searchform
+                h2 Search movies
+                br
+
+                | Title: 
+                input(type="text" name='title') 
+                | Genre:
+                input(type="text" name='genre')
+                | Year:
+                input(type="text" name='year') 
+                | Minimum Rating:
+                input(type="text" name='minrating')
+                br
+                button(type='submit') Search
+
+            br
+            br
+            
+            form(action="/people" method='get').searchform
+
+                h2 Search People
+                br
+                | Name:
+                input(type="text" name='name') 
+                br
+                button(type='submit') Search
+            br
+            br
+
+            form(action="/users" method='get').searchform
+                h2 Search Users
+                br
+                | Name:
+                input(type="text" name='name')
+                br
+                button(type='submit') Search
+        

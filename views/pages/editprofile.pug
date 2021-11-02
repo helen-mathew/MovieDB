@@ -1,0 +1,33 @@
+html
+    head
+    include ../partials/header
+    title Edit Profile
+
+    body
+        include ../partials/navbar
+        form.createmovie(action="/users/"+session.user._id+"/edit",method='post')
+            h2 Edit Profile
+            br
+            | Name:
+            input(type="text", name="name" value=session.user.name)
+            | Username:
+            input(type="text", name="username" value=session.user.username) 
+            | Password:
+            input(type="password", name="password" value=session.user.password)
+            | Status:
+            br
+            label(for="regular") Regular
+            input(type="radio", name="contributing" value='false' id='regular' checked=session.user.contributing===false)
+            //- -
+            //-     if(users[userid].contributing===true){
+                    
+            //-     }
+            | 
+            br
+            label(for="contributing") Contributing
+        
+            input(type="radio" name="contributing" value='true' id='contributing' checked=session.user.contributing===true)
+            | 
+            br
+            button.submitbtn(type='submit') Done
+            

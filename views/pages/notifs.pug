@@ -1,0 +1,16 @@
+html(lang="en")
+    head
+        include ../partials/header
+        title Search
+    body(onload='notif()')
+
+    include ../partials/navbar
+    .trend
+        h1 Notifications
+        button.submitbtn(onclick="deletenotifs()") Clear notifications
+        div#notifs
+            each notif in user.notifications
+                a(href=notif.link) #{notif.notif}
+                br
+                br
+            

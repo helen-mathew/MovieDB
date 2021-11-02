@@ -1,0 +1,129 @@
+html(lang="en")
+    head
+        include ../partials/header
+        title Search Results
+    body
+
+        include ../partials/navbar
+
+        
+        .results
+            
+            
+            -if(searchtype==='advanced'){
+                
+                -if(resulttype==='movies'){
+                    -if(!query.page || query.page===1 ){
+                    
+                    a(href='/movies?title='+(query.title|| '')+"&genre="+(query.genre || '')+"&year="+(query.year || '')+"&minrating="+(query.minrating|| '')+ "&page="+2) Next
+                    -}else if (query.page>=1){
+                        a(href='/movies?title='+(query.title|| '')+"&genre="+(query.genre || '')+"&year="+(query.year || '')+"&minrating="+(query.minrating|| '')+"&page="+(Number(query.page)-1)) Previous
+                        a(href='/movies?title='+(query.title|| '')+"&genre="+(query.genre || '')+"&year="+(query.year || '')+"&minrating="+(query.minrating|| '')+"&page="+(Number(query.page)+1)) Next
+                    -}
+                    h2.searchtitle Search results
+                    h6.searchcategory Title: #{query.title}
+                    h6.searchcategory Genre: #{query.genre}
+                    h6.searchcategory Year: #{query.year}
+                    h6.searchcategory Minimum Rating: #{query.minrating}
+                -}
+                -else if(resulttype==='people'){
+                    -if(!query.page || query.page===1 ){
+                    
+                    a(href='/people?name='+(query.name|| '')+"&page="+2) Next
+                    -}else if (query.page>=1){
+                        a(href='/people?name='+(query.name|| '')+"&page="+(Number(query.page)-1)) Previous
+                        a(href='/people?name='+(query.name|| '')+"&page="+(Number(query.page)+1)) Next
+                    -}
+                    h2.searchtitle Search results for "#{query.name}"
+                -}else{
+                    -if(!query.page || query.page===1 ){
+                    
+                    a(href='/users?name='+(query.name|| '')+"&page="+2) Next
+                    -}else if (query.page>=1){
+                        a(href='/users?name='+(query.name|| '')+"&page="+(Number(query.page)-1)) Previous
+                        a(href='/users?name='+(query.name|| '')+"&page="+(Number(query.page)+1)) Next
+                    -}
+                    h2.searchtitle Search results for "#{query.name}"
+                -}
+                
+            -}
+            -else if (searchtype==='general'){
+                
+                -if(!query.page || query.page===1 ){
+                    
+                    a(href='/search?search='+query.search+"&category="+query.category+"&page="+2) Next
+                -}else if (query.page>=1){
+                    a(href="/search?search="+query.search+"&category="+query.category+"&page="+(Number(query.page)-1)) Previous
+                    a(href="/search?search="+query.search+"&category="+query.category+"&page="+(Number(query.page)+1)) Next
+                -}
+                h2.searchtitle Search results for "#{q}"
+                h6.searchcategory Search category: #{(category)}
+                
+            -}
+        
+            hr
+            -if(searchresults.length===0){
+                | No results found
+            -}else{
+                -if(similarto){
+                    -if(!query.page || query.page===1 ){
+                    
+                    a(href='/movies/' +similarto._id+"/similar?" +"page="+2) Next
+                    -}else if (query.page>=1){
+                        a(href='/movies/' +similarto._id+"/similar?"+"page="+(Number(query.page)-1)) Previous
+                        a(href='/movies/' +similarto._id+"/similar?" +"page="+(Number(query.page)+1)) Next
+                    -}
+                    h2 Similar to #{similarto.Title}
+                -}
+                
+                each result in searchresults  
+                    -if(result.name){
+                        -if(result.moviesWrote){
+                            div.resultDiv
+                                -let url = "/people/" +result.id
+                                a(href=url) #{result.name}
+                            br
+                            hr
+                        -}
+                        -else if(result.username){
+                            div.resultDiv
+                                -let url = "/users/" +result.id
+                                a(href=url) #{result.name}
+                            br
+                            hr
+                        -}
+                        
+                    -}
+
+                    -else{
+                        div.resultDiv
+                            .resultPoster
+                                a(href="/movies/"+result.id)
+                                    img(src=result.Poster)
+                            div.resultText
+                                h3
+                                    a(href="/movies/"+result.id)  #{result.Title} (#{result.Year})
+                            
+                                i.fas.fa-star(id='star') 
+                                -if(result.averagerating>0){
+                                    |  #{result.averagerating.toFixed(1)}/10
+                                -}else{
+                                    |  No ratings yet
+                                -}
+                                p.desc
+                                
+                                | #{result.Plot}
+                                
+                                p
+                                    |Runtime: #{result.Runtime} min
+                                p
+                                    |Genre: 
+                                    -let genres = result.Genres
+                                        each genre in genres  
+                                            -let genrelower = genre.toLowerCase();
+                                            a(href="/movies/?genre="+genrelower) #{genre}, 
+                        hr
+                    -}
+                -}
+                
+            

@@ -1,0 +1,67 @@
+head
+  include ../partials/header
+  title Sign Up
+
+include ../partials/navbar
+form.main(action='/users' method='post')
+  h1 Sign Up
+  // importing envelope icon for email
+  .fields
+    i.fas.fa-envelope
+    |             Enter your Name: 
+    input(type='text' placeholder='example@abc.com' name='name' id='name')
+    br
+  br
+  // importing icon for user
+  .fields
+    -if(error==='exists'){
+      p.error This username is taken, try again
+    -}
+    i.fas.fa-user
+    |             Create a username: 
+    input(type='text' placeholder='eg: @janedoe' name='username' id='username')
+  br
+  // importing icon for password
+  .fields
+    i.fas.fa-lock
+    |             Create a password: 
+    input(type='password' placeholder='*********' name='password' id='password')
+  br
+  // creating button
+  //-a(href='profile.html')
+  input.btn#singup-btn(type='button' value='Create' onclick='signup()')
+  
+  br
+  .sign-up
+    a(href='/login') Log in instead
+  br
+  br
+//- form.main
+//-   h1 Sign Up
+//-   // importing envelope icon for email
+//-   .fields
+//-     i.fas.fa-envelope
+//-     |             Enter your Name: 
+//-     input(type='text' placeholder='example@abc.com' name='name' id='name')
+//-     br
+//-   br
+//-   // importing icon for user
+//-   .fields
+//-     i.fas.fa-user
+//-     |             Create a username: 
+//-     input(type='text' placeholder='eg: @janedoe' name='username' id='username')
+//-   br
+//-   // importing icon for password
+//-   .fields
+//-     i.fas.fa-lock
+//-     |             Create a password: 
+//-     input(type='password' placeholder='*********' name='password' id='pw')
+//-   br
+//-   // creating button
+//-   //-a(href='profile.html')
+//-   button.btn(type='submit' onclick=signup()) Create an account
+//-   br
+//-   .login
+//-     a(href='/login') Log in instead
+//-   br
+//-   br

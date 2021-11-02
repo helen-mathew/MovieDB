@@ -1,0 +1,46 @@
+[
+    {
+        "name": "Anna",
+        "username": "Anna-u",
+        "password": "anna-p",
+        "id": 0,
+        "contributing": false,
+        "reviews": [0],
+        "movies_added": [],
+        "following": { "users": [1], "people": [1] },
+        "followers": [1]
+    },
+    {
+        "name": "John",
+        "username": "John-u",
+        "password": "John-p",
+        "id": 1,
+        "contributing": true,
+        "reviews": [],
+        "movies_added": [],
+        "following": { "users": [0], "people": [1] },
+        "followers": []
+    },
+    {
+        "name": "Bill",
+        "username": "Bill-u",
+        "password": "Bill-p",
+        "id": 2,
+        "contributing": true,
+        "reviews": [],
+        "movies_added": [],
+        "following": { "users": [1], "people": [1] },
+        "followers": []
+    },
+    {
+        "name": "Shanay",
+        "username": "Shanay-u",
+        "password": "Shanay-p",
+        "id": 3,
+        "contributing": false,
+        "reviews": [],
+        "movies_added": [],
+        "following": { "users": [1], "people": [1] },
+        "followers": []
+    }
+]

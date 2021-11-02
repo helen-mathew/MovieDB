@@ -1,0 +1,29 @@
+html
+    head
+    include ../partials/header
+    title Following
+
+    body
+        include ../partials/navbar
+
+        .personDiv
+            //- img(src='/img/following.png' alt='People Icon')
+            h2 Followers
+            #peopleDiv
+                
+                
+                //-h4 Users
+                each f in user.followers
+                    a(href="/users/"+f.id) #{f.name}
+                    br
+                
+                    //-a(href="#") #{f.name}
+                br
+                //- h4 People
+                //- each p in user.following.people
+                //-     a(href="/people/"+p.id) #{p.name}
+                //-     br
+            
+            
+            
+            a.back(href='/users/'+user._id) Back to profile

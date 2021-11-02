@@ -1,0 +1,188 @@
+html(lang="en")
+    head
+        include ../partials/header
+        title Search Results
+    body
+
+        include ../partials/navbar
+
+        
+        .results
+            
+            -if(query){
+                -if(resulttype === ('movies')){
+                    h2.searchtitle Search results
+                    h6.searchcategory Title: #{query.title}
+                    h6.searchcategory Genre: #{query.genre}
+                    h6.searchcategory Year: #{query.year}
+                    h6.searchcategory Minimum Rating: #{query.minrating}
+                    each result in searchresults
+                        div.resultDiv
+                                .resultPoster
+                                    a(href="/movies/"+result.id)
+                                        img(src=result.Poster)
+                                div.resultText
+                                    h3
+                                        a(href="/movies/"+result.id)  #{result.Title} (#{result.Year})
+                                
+                                    //- i.fas.fa-star(id='star')
+                                    //- -if(result.reviews.length===0){
+                                    //-     | No Ratings yet
+                                    //- -}
+                                    //- -else{
+                                    //-     -let rating=0;
+                                    //-     each rev in result.reviews
+                                    
+                                            
+                                    //-         -rating+=Number(rev.rating);
+                                            
+                                    //-         -finalrating= (rating/(result.reviews.length)).toFixed(1)
+                                        
+                                    //-     |  #{finalrating}/10
+                                    //- -}
+
+                                    p.desc
+                                    | #{result.Plot}
+                                    p.cast
+                                    | Cast: 
+                                    //-let actors = result.Actors.split(',')
+                                    each actor in result.actorIDs
+                                        a(href='/people/'+actor) #{actor}, 
+                                    //-     -}
+
+                                    //- | #{result.actors}
+                                    //- each a in result.actors
+                                    //-     -let num = Number(a)
+                                    //-     | #{JSON.stringify(people[num])}
+
+
+                                    p.Director
+                                    | Director: 
+                                    a(href='#') #{result.Director} 
+                                    
+                                    p.Writer
+                                    | Writer: 
+                                    //- -let writers = result.Writer.split(',')
+                                    each writer in result.writerIDs
+                                        a(href='/') #{writer}, 
+
+                                    p
+                                        |Runtime: #{result.Runtime}
+                                    p
+                                        |Genre: 
+                                        -let genres = result.Genre
+                                            each genre in genres  
+                                                -let genrelower = genre.toLowerCase();
+                                                a(href="/movies/?genre="+genrelower) #{genre}, 
+                            
+                -}
+                -else{
+                    h2.searchtitle Search results for "#{query.name}"
+                    each result in searchresults  
+                        p #{result.name}
+
+                        -if(resulttype===('people')){
+                            //- -if(result.hasOwnProperty('history')){
+                            div.resultDiv
+                                -let url = "/people/" +result.id
+                                a(href=url) #{result.name}
+                            br
+                            hr
+                            -}
+                -}
+                
+            -}
+            -else{
+                
+                h2.searchtitle Search results for "#{q}"
+                h6.searchcategory Search category: #{category}
+                
+            -}
+        
+            
+            //- -if(searchresults.length===0){
+            //-     | No results found
+            //- -}else{
+            //-     each result in searchresults  
+                    
+            //-         -if(resulttype===('people')){
+            //-             //- -if(result.hasOwnProperty('history')){
+            //-             div.resultDiv
+            //-                 -let url = "/people/" +result.id
+            //-                 a(href=url) #{result.name}
+            //-             br
+            //-             hr
+            //-             -}
+            //-             //- -}
+            //-         -else if(result.hasOwnProperty('reviews')){
+            //-                 div.resultDiv
+            //-                     -let url = "/users/" +result.id
+            //-                     a(href=url) #{result.name}
+            //-                 br
+            //-                 hr
+            //-             -}
+                        
+            //-         -}
+
+            //-         -else{
+            //-             div.resultDiv
+            //-                 .resultPoster
+            //-                     a(href="/movies/"+result.id)
+            //-                         img(src=result.Poster)
+            //-                 div.resultText
+            //-                     h3
+            //-                         a(href="/movies/"+result.id)  #{result.Title} (#{result.Year})
+                            
+            //-                     //- i.fas.fa-star(id='star')
+            //-                     //- -if(result.reviews.length===0){
+            //-                     //-     | No Ratings yet
+            //-                     //- -}
+            //-                     //- -else{
+            //-                     //-     -let rating=0;
+            //-                     //-     each rev in result.reviews
+                                
+                                        
+            //-                     //-         -rating+=Number(rev.rating);
+                                        
+            //-                     //-         -finalrating= (rating/(result.reviews.length)).toFixed(1)
+                                    
+            //-                     //-     |  #{finalrating}/10
+            //-                     //- -}
+
+            //-                     p.desc
+            //-                     | #{result.Plot}
+            //-                     p.cast
+            //-                     | Cast: 
+            //-                     //-let actors = result.Actors.split(',')
+            //-                     each actor in result.actorIDs
+            //-                         a(href='/people/'+actor) #{actor}, 
+            //-                     //-     -}
+
+            //-                     //- | #{result.actors}
+            //-                     //- each a in result.actors
+            //-                     //-     -let num = Number(a)
+            //-                     //-     | #{JSON.stringify(people[num])}
+
+
+            //-                     p.Director
+            //-                     | Director: 
+            //-                     a(href='#') #{result.Director} 
+                                
+            //-                     p.Writer
+            //-                     | Writer: 
+            //-                     //- -let writers = result.Writer.split(',')
+            //-                     each writer in result.writerIDs
+            //-                         a(href='/') #{writer}, 
+
+            //-                     p
+            //-                         |Runtime: #{result.Runtime}
+            //-                     p
+            //-                         |Genre: 
+            //-                         -let genres = result.Genre
+            //-                             each genre in genres  
+            //-                                 -let genrelower = genre.toLowerCase();
+            //-                                 a(href="/movies/?genre="+genrelower) #{genre}, 
+            //-             hr
+            //-         -}
+                
+            

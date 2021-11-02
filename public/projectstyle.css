@@ -1,0 +1,1005 @@
+/* mobile */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #d8dba9;
+}
+
+.error {
+    text-align: left;
+    color: red;
+}
+/* alternate body class for dark mode */
+body.dark {
+    margin: 0;
+    padding: 0;
+    background-color: #5d6850;
+}
+
+.trendtitle {
+    color: #222725;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+/* same title but dark mdoe */
+body.dark .trendtitle {
+    margin: auto;
+    color: #e8e8d9;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.trend {
+    margin-top: 28%;
+    display: flex;
+    flex-direction: column;
+}
+
+.moviePoster img {
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    width: 85%;
+    border-radius: 5px;
+}
+
+.otherMovies {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.posters {
+    width: auto;
+    padding: 5%;
+}
+.posters img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.title {
+    text-align: center;
+    color: #222725;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* WHY ISNT THIS WORKINGGGGGGGGGGGGGGYSDHBVH */
+.title a:hover {
+    text-decoration: underline;
+}
+.plot,
+.cast {
+    margin: 3%;
+}
+
+nav {
+    position: fixed;
+    width: 50%;
+    height: auto;
+    /* left: 0; */
+    z-index: 1;
+    top: 0;
+    background-color: #899878;
+    display: grid;
+    grid-template-columns: 15% 60% 25%;
+    grid-gap: 10px;
+    /* border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px; */
+}
+
+body.dark nav {
+    position: fixed;
+    width: 100%;
+
+    left: 0;
+    z-index: 1;
+    top: 0;
+    background-color: #222725;
+
+    display: grid;
+    grid-template-columns: repeat(0.25fr, 0.5fr, 0.25fr);
+    grid-gap: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.logo {
+    height: 100%;
+}
+.logopic {
+    position: relative;
+    height: 100%;
+}
+
+nav .searchbar {
+    height: 40%;
+    display: flex;
+    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    align-self: center;
+    justify-self: center;
+    grid-column: 2;
+    background: #d8dba9;
+    margin-top: 5%;
+    padding-left: 5%;
+    border-radius: 40px;
+}
+
+body.dark .searchbar {
+    display: flex;
+    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    align-self: center;
+    justify-self: center;
+    grid-column: 2;
+    background: #859575;
+    /* padding: 15px;
+    height: 5px;
+    width: 400px; */
+    border-radius: 40px;
+}
+/* nav ul {
+    display: none;
+} */
+#searchIcon {
+    background: none;
+    border: none;
+}
+#searchIcon:hover {
+    cursor: pointer;
+}
+nav li {
+    display: inline-block;
+
+    margin: 15;
+}
+
+nav li a {
+    text-decoration: none;
+
+    color: #222725;
+    border-radius: 30px;
+}
+nav form {
+    text-align: center;
+}
+
+nav li a:hover {
+    color: #d8dba9;
+    text-decoration: none;
+}
+.log:hover {
+    background-color: #222725;
+    background-size: contain;
+    border-radius: 15px;
+}
+/* log in and dark mode buttons */
+.log,
+.dark-btn {
+    padding: 0;
+    outline: none;
+    background: none;
+    border: none;
+    /* color: aliceblue; */
+    /* text-align: center; */
+}
+
+.searchbar i {
+    color: #5a5353;
+    align-self: center;
+    float: right;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+}
+
+.searchbar i:hover {
+    color: black;
+}
+#search {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    width: 90%;
+}
+
+.dropbtn:hover,
+.log:hover,
+.dropbtn:focus,
+.log:focus {
+    color: #d8dba9;
+    background-color: #222725;
+
+    border-radius: 10px;
+}
+.log a {
+    color: #222725;
+}
+.log a:hover {
+    color: #d8dba9;
+}
+
+.dropdown {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15;
+}
+
+.usercontent {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    border: 1px solid #ddd;
+    z-index: 1;
+    margin-top: 40%;
+    border-radius: 10px;
+    margin-right: 61%;
+}
+
+#usercontent a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+#usercontent a:hover {
+    background-color: #f1f1f1;
+}
+
+.display {
+    display: block;
+    z-index: 1;
+}
+.fas.fa-star {
+    color: orange;
+}
+.profileDiv {
+    text-align: center;
+    width: 70%;
+    height: auto;
+    margin: auto;
+    margin-top: 30%;
+    /* border: 2px solid;
+    border-radius: 15px; */
+}
+#category {
+    background: none;
+    border: none;
+    border-right: 1px black;
+}
+
+.advancedsearch {
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    margin-top: 40%;
+}
+.advancedsearch input {
+    margin: auto;
+}
+
+.searchform input {
+    display: block;
+}
+
+.createmovie {
+    margin: auto;
+    width: 70%;
+    margin-top: 30%;
+    display: flex;
+    flex-direction: column;
+}
+.createmovie input {
+    display: block;
+}
+
+#contributing,
+#regular {
+    display: inline;
+}
+
+.login-div,
+.main {
+    margin: auto;
+    width: 80%;
+    height: 50%;
+    text-align: center;
+    margin-top: 47%;
+    border-radius: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: 2px solid #222725;
+}
+
+.content {
+    width: 80%;
+    margin: auto;
+    margin-top: 27%;
+}
+.posterDiv {
+    margin: auto;
+    /* margin-top: 40%; */
+    border-radius: 10px;
+}
+
+.poster {
+    border-radius: 10px;
+    width: 70%;
+    margin: auto;
+    display: block;
+}
+
+.results {
+    margin-top: 28%;
+    text-align: center;
+}
+.movieInfo {
+    margin-top: 8%;
+}
+
+.fields input {
+    text-align: left;
+    width: 70%;
+    padding-top: 9px;
+    border: none;
+    border-bottom: 1px solid;
+    outline: none;
+    background: none;
+}
+.btn,
+.submitbtn {
+    width: 60%;
+    outline: none;
+    background: #222725;
+    border-radius: 15px;
+    color: #d8dba9;
+    border: 3px solid #222725;
+}
+#edit {
+    display: block;
+    text-align: center;
+}
+/*Homepage desktop*/
+@media only screen and (min-width: 768px) {
+    .usercontent {
+        margin-top: 10%;
+        margin-right: auto;
+    }
+    .createmovie {
+        margin: auto;
+        width: 70%;
+        margin-top: 10%;
+        display: flex;
+        flex-direction: column;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #d8dba9;
+    }
+
+    /* alternate body class for dark mode */
+    body.dark {
+        margin: 0;
+        padding: 0;
+        background-color: #5d6850;
+    }
+
+    .posterDiv {
+        margin-top: 3%;
+    }
+
+    /* title that reads 'Latest' on the page */
+    .trendtitle {
+        margin: 0;
+        color: #222725;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+    /* same title but dark mdoe */
+    body.dark .trendtitle {
+        margin-bottom: 12px;
+        margin-left: 10px;
+        color: #e8e8d9;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    /* div containing the whole block incl title */
+    .trend,
+    .results {
+        display: flex;
+
+        flex-direction: column;
+        padding: 3mm;
+        width: 90%;
+        margin: auto;
+        text-align: left;
+        padding-top: 114;
+    }
+
+    /* div contianing only the movie info */
+    .info {
+        display: flex;
+        flex-direction: row;
+        border-radius: 15px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        height: 70%;
+    }
+
+    /* same as above but dark mode */
+    body.dark .info {
+        display: flex;
+        flex-direction: row;
+        border-radius: 15px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        height: 70%;
+    }
+
+    /* div containing rest of the block */
+    .text {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        padding-left: 10px;
+    }
+
+    /* title of movie */
+    .title {
+        text-decoration: none;
+        margin: 3%;
+        text-align: start;
+        color: #222725;
+    }
+
+    /* image link holding the movie posters */
+    .moviePoster img {
+        display: block;
+        width: 100%;
+        border: 2px solid black;
+        border-radius: 15px;
+    }
+    /* div holding the other smaller movie stuff */
+    .otherMovies {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 5px;
+    }
+
+    /* text that reads 'up next */
+    .next {
+        /* margin-top: -4;
+        margin-bottom: 12px; */
+        text-align: left;
+        margin-top: auto;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .posters {
+        text-align: center;
+        padding: 5;
+        margin-top: -16px;
+    }
+    .posters img {
+        width: 100px;
+        border-radius: 10px;
+        height: 148px;
+    }
+
+    .posters p {
+        overflow-wrap: break-word;
+    }
+    /* nav bar */
+    nav {
+        position: fixed;
+        width: 100%;
+
+        left: 0;
+        z-index: 1;
+        top: 0;
+        background-color: #899878;
+
+        display: grid;
+        grid-template-columns: 25% 50% 25%;
+        grid-gap: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    body.dark nav {
+        position: fixed;
+        width: 100%;
+
+        left: 0;
+        z-index: 1;
+        top: 0;
+        background-color: #222725;
+
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    /* ul containing the log in button and the dark mode button */
+    nav ul {
+        display: auto;
+        grid-column: 3;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-self: center;
+        align-self: center;
+        list-style-type: none;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+    }
+    .logopic {
+        width: 90px;
+    }
+
+    nav li {
+        display: inline-block;
+
+        margin: 15;
+    }
+
+    nav li a {
+        text-decoration: none;
+
+        color: #222725;
+        border-radius: 30px;
+    }
+
+    nav li a:hover {
+        color: #d8dba9;
+        text-decoration: none;
+    }
+    .log:hover {
+        background-color: #222725;
+        background-size: contain;
+        border-radius: 15px;
+    }
+    /* log in and dark mode buttons */
+    .log,
+    .dark-btn {
+        outline: none;
+        background: none;
+        border: none;
+    }
+
+    nav .searchbar {
+        display: flex;
+        justify-content: flex-start;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        align-self: center;
+        justify-self: center;
+        grid-column: 2;
+        background: #d8dba9;
+
+        border-radius: 40px;
+    }
+
+    body.dark .searchbar {
+        display: flex;
+        justify-content: flex-start;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        align-self: center;
+        justify-self: center;
+        grid-column: 2;
+        background: #859575;
+        padding: 15px;
+        height: 5px;
+        width: 400px;
+        border-radius: 40px;
+    }
+
+    #category {
+        background: none;
+        border: none;
+        border-right: 1px black;
+    }
+    #searchIcon {
+        background: none;
+        border: none;
+    }
+    #searchIcon:hover {
+        cursor: pointer;
+    }
+    nav form a {
+        font-weight: 400;
+    }
+
+    .searchbar i {
+        color: #5a5353;
+        align-self: center;
+        float: right;
+
+        border-radius: 50%;
+
+        text-decoration: none;
+    }
+
+    .searchbar i:hover {
+        color: black;
+    }
+    #search {
+        border: none;
+        background: none;
+        outline: none;
+        float: left;
+        padding: 0;
+        width: 90%;
+    }
+
+    /*Log in page*/
+
+    .login-div,
+    .main {
+        width: 25%;
+        height: 58%;
+        margin: auto;
+        margin-top: 15%;
+        border-radius: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border: 2px solid #222725;
+    }
+    /* .main {
+        width: 25%;
+        margin-top: 0;
+        background-color: #d8dba9;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 5px;
+        border-radius: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        border: 2px solid #222725;
+    } */
+
+    body.dark .login-div,
+    body.dark .main {
+        width: 280px;
+        height: 320px;
+        background-color: #899878;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 5px;
+        border-radius: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .login-div h1,
+    .main h1 {
+        text-align: center;
+        color: black;
+    }
+
+    .login a {
+        margin-left: 80;
+    }
+
+    .but {
+        padding: 10px 30px;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        outline: none;
+        position: relative;
+    }
+    /* input field divs */
+    .fields {
+        margin: auto 30px;
+        text-align: left;
+        color: #222725;
+    }
+
+    .fields input {
+        text-align: left;
+        width: 100%;
+        padding-top: 9px;
+        border: none;
+        border-bottom: 1px solid;
+        outline: none;
+        background: none;
+        color: black;
+    }
+
+    ::placeholder {
+        color: #5a5353;
+        padding: 6px;
+    }
+
+    .btn {
+        width: 60%;
+
+        outline: none;
+        background: #222725;
+        border-radius: 15px;
+        color: #d8dba9;
+        border: 3px solid #222725;
+    }
+
+    .fields i {
+        width: 26px;
+    }
+
+    .forgot {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .fields input {
+        text-align: left;
+        width: 100%;
+        padding-top: 9px;
+        border: none;
+        border-bottom: 1px solid;
+        outline: none;
+        background: none;
+    }
+
+    .sign-up {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .log {
+        text-align: center;
+    }
+
+    /* movie page */
+
+    .content {
+        background-color: #d8dba9;
+        padding: 15;
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+        margin-top: 18%;
+        border-radius: 15px;
+
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    body.dark .content {
+        background-color: inherit;
+        padding: 15;
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+        margin-top: 10%;
+        border-radius: 15px;
+
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    #edit {
+        display: inline-block;
+    }
+    .poster {
+        width: 300;
+        border-radius: 15px;
+    }
+
+    .movieInfo {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+    }
+
+    .descDiv {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin: 10px;
+        margin-left: 64px;
+    }
+
+    .rev {
+        margin-left: 20;
+    }
+
+    /* .username{
+    margin-left: 30;
+} */
+
+    .actorinfo {
+        background-color: #d8dba9;
+        padding: 15;
+        width: 90%;
+        margin: auto;
+        margin-top: 10%;
+        border-radius: 15px;
+        height: 70%;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        display: flex;
+        flex-direction: row;
+        border: 2px solid #222725;
+    }
+
+    body.dark .actorinfo {
+        background-color: #899878;
+        padding: 15;
+        width: 90%;
+        margin: auto;
+        margin-top: 10%;
+        border-radius: 15px;
+        height: 70%;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .actorinfo img {
+        width: 150;
+        border-radius: 15px;
+        border: 2px solid;
+    }
+
+    .actorname {
+        display: flex;
+        flex-direction: column;
+        font-size: x-large;
+    }
+
+    .actorinfo p {
+        margin-left: 49px;
+        font-size: x-large;
+    }
+
+    /*profile page*/
+
+    /* changing the properties of the div holding the profile stuff  */
+    .profileDiv {
+        text-align: left;
+        width: 80%;
+        height: auto;
+        margin: auto;
+    }
+
+    /* editing the image on the profile page */
+    .userinfo img {
+        width: 10%;
+        height: fit-content;
+    }
+
+    .userinfo {
+        display: flex;
+        margin-top: 15%;
+        flex-direction: row;
+    }
+
+    .createdmovies {
+        height: 100%;
+    }
+    /* .follow {
+        display: flex;
+        flex-direction: row;
+    }
+    #following {
+        margin-left: 10%;
+    } */
+    /* changing the c */
+
+    body.dark .profileDiv {
+        text-align: center;
+        background-color: #899878;
+        border-radius: 15px;
+        margin-top: 130;
+        margin-right: 280px;
+        margin-left: 280;
+        height: 100vh;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .profilereview {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .profilereview img {
+        width: 15%;
+    }
+    .review {
+        margin-left: 2%;
+    }
+
+    .review a {
+        color: #222725;
+        text-decoration: none;
+    }
+    .review a:hover {
+        text-decoration: underline;
+    }
+    .peopleDiv {
+        text-align: center;
+    }
+    #people {
+        list-style-type: none;
+        padding-inline-start: 0;
+        line-height: 180%;
+    }
+
+    /* search results page */
+    /* .resultDiv img {
+        width: 18%;
+    } */
+    .resultPoster {
+        width: 30%;
+    }
+    .resultPoster img {
+        height: 300;
+    }
+    .resultPoster a {
+        height: 100%;
+    }
+
+    .resultDiv {
+        margin: auto;
+        display: flex;
+        width: 100%;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .resultText {
+        font-size: 10;
+        /* margin-left: 20; */
+    }
+
+    h3 a {
+        color: black;
+    }
+
+    h3 a:hover {
+        color: blue;
+    }
+
+    /* person page */
+    .personDiv {
+        margin-top: 10%;
+        margin-left: 5%;
+    }
+    .advancedsearch {
+        text-align: left;
+        margin-left: auto;
+        margin-top: 15%;
+    }
+    .advancedsearch input {
+        margin-left: 0;
+    }
+
+    .searchcategory {
+        margin: 0;
+    }
+    .notif:hover {
+        cursor: pointer;
+    }
+}

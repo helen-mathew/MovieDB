@@ -1,0 +1,34 @@
+head
+  include ../partials/header
+  title Log In
+
+include ../partials/navbar
+form.login-div()
+  h1 Login
+
+
+  .fields
+    i.fas.fa-user
+    |             Username: 
+    br
+    input(type='text' placeholder='eg: @janedoe' name='username' id='username')
+    -if(error==='no user'){
+    
+      p.error User Not Found, Try Again
+    -}
+    
+    
+  .fields
+    i.fas.fa-lock
+    |             Password: 
+    input(type='password' placeholder='*********' name='password' id='password')
+  .forgot
+  
+  br
+
+  input.btn#log-btn(type='button' value='Sign In' onclick='login()')
+  br
+  .sign-up
+    a(href='signup') Create a new account
+  br
+  br

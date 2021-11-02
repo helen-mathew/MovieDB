@@ -1,0 +1,46 @@
+html
+    head
+        include ../partials/header
+        
+        title Watchables
+
+    body    
+    include ../partials/navbar
+
+    div.trend
+        -if(session.user){
+            h2.trendtitle Recommended
+        -}
+        //- recommendation alogorithm hasnt been set yet this is random
+        
+        div.info
+            - let firstMovie = movies[0]
+            
+            div.movieposter
+                a(href='/movies/'+firstMovie._id)
+                    img(src=firstMovie.Poster)
+                    br
+            div.text
+                a.title(href='/movies/'+firstMovie.id)
+                    h3 #{firstMovie.Title}
+                p.plot #{firstMovie.Plot}
+
+                
+    
+    
+        div.otherMoviesDiv
+            //-h2.next Up Next
+            br
+            .otherMovies
+                -let newMovies = movies.slice(1,7)
+                each movie in newMovies
+                    a(href="/movies/"+movie._id)
+                        div.posters
+                            img(src=movie.Poster)
+                            p #{movie.Title}
+    -if(session.user){               
+        a(href="/recommended") View more recommended movies
+    -} 
+                    
+
+

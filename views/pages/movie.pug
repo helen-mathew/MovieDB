@@ -1,0 +1,155 @@
+html
+    head
+        include ../partials/header
+        
+        title #{movie.Title}
+    body
+
+        include ../partials/navbar
+        .content
+            -if(session.user &&session.user.contributing){
+                a#edit(href="/movies/"+movie.id+"/edit") Edit
+            -}
+            .movieInfo
+                
+                .posterDiv
+                    img.poster(src=movie.Poster)
+                .descDiv
+                    h2 #{movie.Title} (#{movie.Year})
+                    .rating
+                        p
+
+                            i.fas.fa-star(id='star') 
+                            -if(movie.reviews.length===0){
+                                | No Ratings yet
+                            -}
+                            -else{
+                                -let rating=0;
+                                //- each rev in movie.reviews
+                            
+                                    
+                                //-     -rating+=Number(rev.rating);
+                                    
+                                //-     -finalrating= (rating/(movie.reviews.length)).toFixed(1)
+                                
+                                //- |  #{finalrating}/10
+                                |  #{movie.averagerating.toFixed(1)}/10
+                            -}
+                            
+
+                    p.desc
+                    | #{movie.Plot}
+                    p.cast
+                    | Cast: 
+                
+                    each actor in movie.actors
+
+                        -if(movie.actors.indexOf(actor)===movie.actors.length-1){
+                            a(href='/people/'+actor.id) #{actor.name}
+                        -}else{
+                            //- adds a comma only if it isnt the last element in the list
+                            a(href="/people/"+actor.id) #{actor.name}, 
+                        -}
+                    
+                        
+                    p.Director
+                    | Director: 
+                    each d in movie.directors
+
+                        -if(movie.directors.indexOf(d)===movie.directors.length-1){
+                            a(href='/people/'+d.id) #{d.name}
+                        -}else{
+                            //- adds a comma only if it isnt the last element in the list
+                            a(href="/people/"+d.id) #{d.name}, 
+                        -}
+                    
+                    p.Writer
+                    | Writer: 
+                    //-let writers = movie.Writer.split(',')
+                    each writer in movie.writers
+                        
+                        
+                        -if(movie.writers.indexOf(writer)===movie.writers.length-1){
+                            a(href='/people/'+writer.id) #{writer.name}
+                        -}else{
+                            a(href="/people/"+writer.id) #{writer.name}, 
+                        -}
+                        
+
+                    p
+                        |Runtime: #{movie.Runtime} min
+                    p
+                        |Genre: 
+                        -let genre = movie.Genres
+                            each g in genre 
+                                -if(genre.indexOf(g)===genre.length-1){
+                                    a(href="/movies?genre="+g) #{g}
+                                -}
+                                -else{
+                                    a(href="/movies?genre="+g) #{g}, 
+                                -}
+
+                    br
+                    br
+                    a(href="/movies/"+movie._id+"/similar") View similar movies
+                                
+                        
+            br
+            .currentReviews
+
+                    h2 Reviews:
+                    hr
+                    //-| #{JSON.stringify(reviews[movie.reviews])}
+                    -if(!movie.reviews || movie.reviews.length===0){
+                        p No reviews yet
+                        
+                    -}
+                    -else{
+                        each rev in movie.reviews
+                            
+                            //- -let reviewobject = reviews[rev]
+                            //- -let reviewuser =users[reviewobject.user]
+                            
+                            
+                            .review 
+                                .rev
+                                    i.fas.fa-star(id='star')   
+                                    |  #{rev.rating}/10
+                                    br
+                                    br
+
+                                    strong.username User:     
+                                    a(href="/users/"+rev.user._id) #{rev.user.name}
+                                    br
+                                    br
+
+                                    
+
+                                    -if(rev.review){
+                                        strong Review: 
+                                        | #{rev.review}
+                                    -}
+                                br
+                                hr
+                    -}
+                        
+                    
+
+
+
+            .addReview
+                -let url = movie.id+'/reviews'
+                form.reviewbox()
+                    h2(for='review') Already watched this? Add a review!
+                    textarea#review(name='review' cols='37' rows='5')
+                    br
+                    br
+                    |                 Give a rating out of 10: 
+                    input#rating(type="text" name='rating' size='1')
+                    br
+                    input(type="button" id='review' onclick='addreview()' value='Add Review')
+                   
+
+                
+                        
+

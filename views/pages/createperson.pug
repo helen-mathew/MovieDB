@@ -1,0 +1,20 @@
+html(lang="en")
+    head
+        include ../partials/header
+        title Add/Edit A Movie
+    body
+        include ../partials/navbar
+        
+        form.createmovie(action="/people",method='post' )
+            h2 Add A Person
+            | Person:
+            -if(error.includes('exists')){
+                p.error This person already exists
+            -}
+            -if(error.includes('name empty')){
+                p.error This field is empty
+            -}
+            input(type="text" name='name' id='name')
+            
+            br
+            input#createperson(type="button", onclick='newperson()' value='Create')

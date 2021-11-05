@@ -12,12 +12,11 @@ var bodyParser = require("body-parser");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 
-const uri =
-    process.env.MONGODB_URI ||
-    "mongodb+srv://helen:RVayMVPaFrWYWQA1@moviedb.b6utl.mongodb.net/moviedb?retryWrites=true&w=majority";
+const mongo_uri = process.env.MONGODB_URI;
 
+console.log(mongo_uri);
 const store = new MongoDBStore({
-    uri: uri,
+    uri: mongo_uri,
     collection: "mySessions",
 });
 //require("mongoose").set("debug", true);
@@ -26,7 +25,7 @@ const mc = require("mongodb").MongoClient; // Access the database (Javascript ve
 
 const mongoose = require("mongoose");
 
-mongoose.connect(uri, {useNewUrlParser: true});
+mongoose.connect(mongo_uri, {useNewUrlParser: true});
 //mongoose.set("debug", true);
 
 const User = require("./models/UserModel");

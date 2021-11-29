@@ -166,6 +166,7 @@ nav li a {
 }
 nav form {
     text-align: center;
+    align-self: center;
 }
 
 nav li a:hover {

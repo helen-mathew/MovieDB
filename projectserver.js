@@ -5,6 +5,7 @@ const moviesRoutes = require("./movies-router");
 const userroutes = require("./users-router");
 const peopleroutes = require("./people-router");
 var bodyParser = require("body-parser");
+require("dotenv").config();
 // let movies = require("./data/movie-data-short.json");
 // let people = require("./data/people.json");
 // let users = require("./data/users.json");

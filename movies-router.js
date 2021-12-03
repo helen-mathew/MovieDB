@@ -3,10 +3,10 @@ const fs = require("fs");
 
 let router = express.Router();
 
-const { search } = require("./users-router");
+const {search} = require("./users-router");
 
-const { writer } = require("repl");
-const { Mongoose } = require("mongoose");
+const {writer} = require("repl");
+const {Mongoose} = require("mongoose");
 const User = require("./models/UserModel");
 const Movie = require("./models/MovieModel");
 const Person = require("./models/PersonModel");
@@ -46,7 +46,7 @@ router.post("/:id/reviews", function (req, res) {
         let review = req.body.review;
         let rating = Number(req.body.rating);
 
-        Movie.findOne({ _id: req.params.id }).exec(function (err, result) {
+        Movie.findOne({_id: req.params.id}).exec(function (err, result) {
             if (err) throw err;
             let rev = new Review();
             rev.user = req.session.user;
@@ -56,7 +56,7 @@ router.post("/:id/reviews", function (req, res) {
             rev.rating = rating;
             rev.movie = result._id;
             //console.log(req.session.user._id);
-            User.findOne({ _id: req.session.user._id })
+            User.findOne({_id: req.session.user._id})
                 .populate("followers")
                 .exec(function (err, user) {
                     if (err) {
@@ -73,7 +73,7 @@ router.post("/:id/reviews", function (req, res) {
                         });
                         f.save();
                     });
-                    Review.find({ movie: result._id }, function (err, reviews) {
+                    Review.find({movie: result._id}, function (err, reviews) {
                         if (err) throw err;
                         //console.log(reviews);
                         if (reviews.length === 0) {
@@ -108,7 +108,7 @@ function editMovie(req, res, next) {
 }
 // router.get("/:mid/similar",[queryParser])
 router.get("/:mid/similar", function (req, res) {
-    Movie.findOne({ _id: req.params.mid }).exec(function (err, movie) {
+    Movie.findOne({_id: req.params.mid}).exec(function (err, movie) {
         if (err) {
             res.status(500).send("Error reading database");
         }
@@ -143,7 +143,7 @@ router.post("/:mid/edit", function (req, res, next) {
     let writers = req.body.writers.split(",");
     let poster = req.body.poster;
     //console.log();
-    Movie.findOne({ _id: req.params.mid }).exec(function (err, movie) {
+    Movie.findOne({_id: req.params.mid}).exec(function (err, movie) {
         if (err) {
             console.log(err);
             return;
@@ -252,7 +252,7 @@ router.post("/", (req, res, next) => {
     let writers = req.body.writers.split(",");
     let poster = req.body.poster;
     //console.log(genre);
-    Movie.findOne({ Title: new RegExp(`^${title}$`, "i") }).exec(function (
+    Movie.findOne({Title: new RegExp(`^${title}$`, "i")}).exec(function (
         err,
         result
     ) {
@@ -355,13 +355,13 @@ router.post("/", (req, res, next) => {
 
 function renderMovie(req, res, next) {
     req.session.url = "/movies/" + req.params.mid;
-    Movie.findOne({ _id: req.params.mid }).exec(function (err, result) {
+    Movie.findOne({_id: req.params.mid}).exec(function (err, result) {
         if (err) {
             console.log(err.message);
         }
         //console.log(result.actor());
         if (!result) {
-            res.status(404).render("pages/404", { session: req.session });
+            res.status(404).render("pages/404", {session: req.session});
         } else {
             //console.log("Movie found:");
             //console.log(result);
@@ -412,7 +412,7 @@ function sendMovie(req, res, next) {
         },
 
         "application/json": function () {
-            res.send(JSON.stringify(req.movie));
+            res.json(JSON.stringify(req.movie));
         },
     });
 }
@@ -457,16 +457,16 @@ function searchMovies(req, res) {
         if (year) {
             //res.send(JSON.stringify(year));
             //console.log(year);
-            q.$and.push({ Year: year });
+            q.$and.push({Year: year});
         }
         if (title) {
-            q.$and.push({ Title: { $regex: title, $options: "i" } });
+            q.$and.push({Title: {$regex: title, $options: "i"}});
         }
         if (genre) {
-            q.$and.push({ Genres: genre });
+            q.$and.push({Genres: genre});
         }
         if (minrating) {
-            q.$and.push({ averagerating: { $gte: minrating } });
+            q.$and.push({averagerating: {$gte: minrating}});
         }
     }
     //console.log(q.$and);

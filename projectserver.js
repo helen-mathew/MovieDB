@@ -125,6 +125,7 @@ function getRecMovies(req, res, next) {
     }
     if (!req.session.user || !req.movies) {
         Movie.find()
+            .limit(8)
             .populate("directorID")
             .populate("actorsIDs")
             .populate("writerIDs")

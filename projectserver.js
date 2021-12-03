@@ -15,7 +15,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 
 const mongo_uri = process.env.MONGODB_URI;
 
-console.log(mongo_uri);
+//console.log(mongo_uri);
 const store = new MongoDBStore({
     uri: mongo_uri,
     collection: "mySessions",
@@ -70,75 +70,34 @@ app.use("/people", peopleroutes);
 app.use("/movies", moviesRoutes);
 app.get("/recommended", [getRecMovies, sendRecs]);
 app.get("/", [getRecMovies, sendHome]);
-function getRecMovies(req, res, next) {
+
+async function getMoviesGen() {
+    let movies = await Movie.find()
+        .limit(8)
+        .populate("directorID")
+        .populate("actorsIDs")
+        .populate("writerIDs");
+    return movies;
+}
+async function getRecMovies(req, res, next) {
     //let skip = (req.query.page - 1) * req.query.limit;
-    if (req.session.user) {
-        User.findOne({_id: req.session.user._id}).exec(function (err, user) {
-            if (err) {
-                console.log(err);
-                res.status(500).send("error reading db");
-            }
-            user.recommendations = [];
+    if (!req.session.user) {
+        req.movies = await getMoviesGen();
+        next();
+    } else {
+        //console.log("wee");
+        let user = await User.findOne({_id: req.session.user._id}).exec();
+        let result = await Movie.find({
+            _id: {$in: user.recommendations},
+        }).exec();
+        //console.log(result);
+        req.movies = result;
 
-            Person.find({followers: user._id}).exec(function (err, people) {
-                //console.log(people.moviesActed);
-                if (err) {
-                    console.log(err);
-                    res.status(500).send("error reading db");
-                }
-                people.forEach((p) => {
-                    p.moviesActed.forEach((m) => {
-                        if (!user.recommendations.includes(m)) {
-                            user.recommendations.push(m);
-                            //console.log(user.recommendations);
-                        }
-                    });
-                    p.moviesWrote.forEach((m) => {
-                        if (!user.recommendations.includes(m)) {
-                            user.recommendations.push(m);
-                        }
-                    });
-                    p.moviesDirected.forEach((m) => {
-                        if (!user.recommendations.includes(m)) {
-                            user.recommendations.push(m);
-                        }
-                    });
-                    //console.log(user.recommendations);
-                });
-                user.save();
-                Movie.find({_id: {$in: user.recommendations}}).exec(function (
-                    err,
-                    result
-                ) {
-                    if (err) {
-                        console.log(err);
-                    }
-                    //console.log(result);
-                    req.movies = result;
-                    //console.log(req.movies);
-                    if (req.movies.length !== 0) next(); //only go to sendHome if the rec array has something, otherwise render regular home page (following if statement)
-                });
-
-                //console.log(user.recommendations.length);
-            });
-        });
-    }
-    if (!req.session.user || !req.movies) {
-        Movie.find()
-            .limit(8)
-            .populate("directorID")
-            .populate("actorsIDs")
-            .populate("writerIDs")
-            .exec(function (err, movies) {
-                if (err) {
-                    console.log(err);
-                    res.status(500).send("error reading db");
-                }
-                //res.send(movies[0].Poster)
-                req.movies = movies;
-                //console.log(req.movies[1]);
-                next();
-            });
+        if (req.movies.length === 0) {
+            req.movies = await getMoviesGen();
+            next();
+        } //only go to sendHome if the rec array has something, otherwise render regular home page (following if statement)
+        next();
     }
 }
 
@@ -237,7 +196,7 @@ function search(req, res, next) {
     //console.log("huh");
     let skip = (req.query.page - 1) * req.query.limit;
     let q = req.query.search;
-    console.log("search:" + q);
+    //console.log("search:" + q);
     if (q.length === 0) {
         //console.log("empty");
         res.render("pages/emptysearch", {

@@ -8,47 +8,42 @@ const Movie = require("./models/MovieModel");
 const Person = require("./models/PersonModel");
 const Review = require("./models/ReviewModel");
 
-router.get("/follow/:pid", function (req, res) {
+router.get("/follow/:pid", async function (req, res) {
     if (!req.session.user) {
         res.redirect("/login");
     } else {
-        User.findOne({ _id: req.session.user._id }, function (err, userA) {
-            if (err) {
-                console.log(err.message);
-            }
+        let userA = await User.findOne({_id: req.session.user._id});
 
-            //userA = result;
+        let person = await Person.findOne({_id: req.params.pid});
 
-            Person.findOne({ _id: req.params.pid }, function (err, person) {
-                if (err) {
-                    console.log(err.message);
+        if (person.followers.includes(userA._id)) {
+            person.followers.splice(person.followers.indexOf(userA._id), 1);
+            person.save();
+            //req.session.user = userA;
+            res.redirect("/users/" + req.session.user._id + "/following");
+        } else {
+            person.followers.push(userA);
+            person.moviesActed.forEach((m) => {
+                if (!userA.recommendations.includes(m)) {
+                    userA.recommendations.push(m);
+                    //console.log(user.recommendations);
                 }
-
-                if (person.followers.includes(userA._id)) {
-                    person.followers.splice(
-                        person.followers.indexOf(userA._id),
-                        1
-                    );
-                    //person.followers.splice(person.followers.indexOf(userA), 1);
-                    //userA.save();
-                    person.save();
-                    //req.session.user = userA;
-                    res.redirect(
-                        "/users/" + req.session.user._id + "/following"
-                    );
-                } else {
-                    //userA.following.people.push(person);
-                    person.followers.push(userA);
-                    userA.save();
-                    person.save();
-                    req.session.user = userA;
-                    res.redirect(
-                        "/users/" + req.session.user._id + "/following"
-                    );
-                }
-                //console.log(userA.following.users);
             });
-        });
+            person.moviesWrote.forEach((m) => {
+                if (!userA.recommendations.includes(m)) {
+                    userA.recommendations.push(m);
+                }
+            });
+            person.moviesDirected.forEach((m) => {
+                if (!userA.recommendations.includes(m)) {
+                    userA.recommendations.push(m);
+                }
+            });
+            userA.save();
+            person.save();
+            req.session.user = userA;
+            res.redirect("/users/" + req.session.user._id + "/following");
+        }
     }
 });
 
@@ -74,7 +69,7 @@ router.get("/create", function (req, res) {
 router.get("/:pid", function (req, res) {
     req.session.url = "/people/" + req.params.pid;
 
-    Person.findOne({ _id: req.params.pid })
+    Person.findOne({_id: req.params.pid})
         .populate("moviesWrote", "Title")
         .populate("moviesDirected", "Title")
         .populate("moviesActed", "Title")
@@ -84,7 +79,7 @@ router.get("/:pid", function (req, res) {
                 console.log(err.message);
             }
             if (!result) {
-                res.status(404).render("pages/404", { session: req.session });
+                res.status(404).render("pages/404", {session: req.session});
             } else {
                 req.person = result;
                 result.frequentcollabs(function (err, collabs) {
@@ -148,7 +143,7 @@ function searchPeople(req, res) {
     let skip = (req.query.page - 1) * req.query.limit;
     let q = {};
     if (name) {
-        q = { name: { $regex: name, $options: "i" } };
+        q = {name: {$regex: name, $options: "i"}};
     }
 
     Person.find(q)
@@ -183,7 +178,7 @@ router.post("/", function (req, res) {
     let personname = req.body.name;
 
     Person.findOne(
-        { name: new RegExp(`^${personname}$`, "i") },
+        {name: new RegExp(`^${personname}$`, "i")},
         function (err, result) {
             if (err) {
                 console.log(err);

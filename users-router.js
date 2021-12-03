@@ -10,50 +10,25 @@ router.use(express.static("other"));
 router.post("/", createUser);
 router.get("/", [queryParser, searchUsers]);
 
-router.get("/follow/:uid", function (req, res) {
+router.get("/follow/:uid", async function (req, res) {
     if (!req.session.user) {
         res.redirect("/login");
     } else {
-        User.findOne({ _id: req.session.user._id }, function (err, userA) {
-            if (err) {
-                console.log(err.message);
-            }
+        let userA = await User.findOne({_id: req.session.user._id});
 
-            //userA = result;
+        let userB = await User.findOne({_id: req.params.uid});
 
-            User.findOne({ _id: req.params.uid }, function (err, userB) {
-                if (err) {
-                    console.log(err.message);
-                }
-
-                if (userB.followers.includes(userA._id)) {
-                    // userA.following.users.splice(
-                    //     userA.following.users.indexOf(userB._id),
-                    //     1
-                    // );
-                    userB.followers.splice(
-                        userB.followers.indexOf(userA._id),
-                        1
-                    );
-                    //userA.save();
-                    userB.save();
-                    req.session.user = userA;
-                    res.redirect(
-                        "/users/" + req.session.user._id + "/following"
-                    );
-                } else {
-                    //userA.following.users.push(userB);
-                    userB.followers.push(userA);
-                    //userA.save();
-                    userB.save();
-                    req.session.user = userA;
-                    res.redirect(
-                        "/users/" + req.session.user._id + "/following"
-                    );
-                }
-                //console.log(userA.following.users);
-            });
-        });
+        if (userB.followers.includes(userA._id)) {
+            userB.followers.splice(userB.followers.indexOf(userA._id), 1);
+            userB.save();
+            req.session.user = userA;
+            res.redirect("/users/" + req.session.user._id + "/following");
+        } else {
+            userB.followers.push(userA);
+            userB.save();
+            req.session.user = userA;
+            res.redirect("/users/" + req.session.user._id + "/following");
+        }
     }
 });
 
@@ -72,7 +47,7 @@ router.post("/:uid/edit", function (req, res) {
     req.session.url = req.path;
     if (req.session.user) {
         //console.log(req.params.uid);
-        User.findOne({ _id: req.params.uid }).exec(function (err, user) {
+        User.findOne({_id: req.params.uid}).exec(function (err, user) {
             if (err) {
                 console.log(err.message);
             }
@@ -101,59 +76,38 @@ router.post("/:uid/edit", function (req, res) {
     }
 });
 
-router.get("/:uid", function (req, res) {
+router.get("/:uid", async function (req, res) {
     req.session.url = "/users/" + req.params.uid;
-    User.findOne({ _id: req.params.uid }).exec(function (err, result) {
-        if (err) {
-            console.log(err.message);
-        }
-        if (!result) {
-            res.status(404).render("pages/404", { session: req.session });
-        } else {
-            result.getFollowingUser(function (err, users) {
-                if (err) {
-                    console.log(err);
-                }
+    let user = await User.findOne({_id: req.params.uid});
+    if (!user) {
+        res.status(404).render("pages/404", {session: req.session});
+    }
 
-                result.getFollowingPeople(function (err, people) {
-                    if (err) {
-                        console.log(err);
-                    }
+    let Ufollowing = await user.getFollowingUser();
+    let Pfollowing = await user.getFollowingPeople();
+    let reviews = await user.getReviews();
+    //console.log(Ufollowing);
+    req.user = user;
+    req.user.following = {users: Pfollowing, people: Ufollowing};
 
-                    result.getReviews(function (err, reviews) {
-                        if (err) {
-                            console.log(err);
-                        }
-                        //console.log(reviews[2]);
-
-                        req.user = result;
-                        req.user.following = { users: [], people: [] };
-                        req.user.following.people = people;
-                        req.user.following.users = users;
-                        req.user.reviews = reviews;
-                        res.format({
-                            "text/html": function () {
-                                //res.send(result);
-                                res.render("pages/profile", {
-                                    user: req.user,
-                                    session: req.session,
-                                });
-                            },
-                            "application/json": function () {
-                                res.send(JSON.stringify(result));
-                            },
-                        });
-                    });
-                });
+    req.user.reviews = reviews;
+    res.format({
+        "text/html": function () {
+            //res.send(result);
+            res.render("pages/profile", {
+                user: req.user,
+                session: req.session,
             });
-            //console.log(result);
-        }
+        },
+        "application/json": function () {
+            res.send(JSON.stringify(result));
+        },
     });
 });
 
 router.get("/:uid/notifications", function (req, res) {
     if (req.session.user) {
-        User.findOne({ _id: req.params.uid }).exec(function (err, result) {
+        User.findOne({_id: req.params.uid}).exec(function (err, result) {
             if (err) {
                 console.log(err);
             }
@@ -170,7 +124,7 @@ router.get("/:uid/notifications", function (req, res) {
 
 router.get("/:uid/followers", function (req, res) {
     req.session.url = "/users/" + req.params.uid + "/following";
-    User.findOne({ _id: req.params.uid })
+    User.findOne({_id: req.params.uid})
         .populate("followers", "name")
         .exec(function (err, result) {
             if (err) {
@@ -183,38 +137,24 @@ router.get("/:uid/followers", function (req, res) {
             });
         });
 });
-router.get("/:uid/following", function (req, res) {
+router.get("/:uid/following", async function (req, res) {
     req.session.url = "/users/" + req.params.uid + "/following";
 
-    User.findOne({ _id: req.params.uid }).exec(function (err, result) {
-        if (err) {
-            console.log(err);
-        }
-        result.getFollowingUser(function (err, users) {
-            if (err) {
-                console.log(err);
-            }
+    let user = await User.findOne({_id: req.params.uid});
+    let Ufollowing = await user.getFollowingUser();
+    let Pfollowing = await user.getFollowingPeople();
 
-            result.getFollowingPeople(function (err, people) {
-                if (err) {
-                    console.log(err);
-                }
-                req.user = result;
-                req.user.following = { users: [], people: [] };
-                req.user.following.people = people;
-                req.user.following.users = users;
+    req.user = user;
+    req.user.following = {users: Ufollowing, people: Pfollowing};
 
-                res.render("pages/following", {
-                    session: req.session,
-                    user: req.user,
-                });
-            });
-        });
+    res.render("pages/following", {
+        session: req.session,
+        user: req.user,
     });
 });
 
 function createUser(req, res) {
-    User.findOne({ username: req.body.username }).exec(function (err, result) {
+    User.findOne({username: req.body.username}).exec(function (err, result) {
         if (err) {
             console.log(err.message);
             return;
@@ -265,7 +205,7 @@ function searchUsers(req, res) {
 
     let q = {};
     if (name) {
-        q = { name: { $regex: name, $options: "i" } };
+        q = {name: {$regex: name, $options: "i"}};
     }
 
     User.find(q)

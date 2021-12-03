@@ -27,7 +27,7 @@ for (let i = 0; i < maxUser; i++) {
 }
 
 let movieList = [];
-for (i = 0; i < 500; i++) {
+for (i = 0; i < 1000; i++) {
     //let movie = new Movie(movies[i]);
     movies[i].reviews = [];
     movieList.push(movies[i]);
@@ -72,6 +72,7 @@ movieList.forEach((movie) => {
 console.log(userList[2]);
 console.log(userList.length);
 console.log(reviewlist.length);
+console.log(movieList.length);
 console.log(movieList[3]);
 fs.rmdirSync("./public/img/uploadedmovieposters/", {
     recursive: true,

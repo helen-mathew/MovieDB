@@ -13,7 +13,7 @@ function notif() {
         }
     };
 
-    xhttp.open("GET", "http://localhost:3000/getupdates");
+    xhttp.open("GET", "/getupdates");
     xhttp.send();
     //setInterval(notif, 3000);
 }
@@ -27,7 +27,7 @@ function deletenotifs() {
         }
     };
 
-    xhttp.open("DELETE", "http://localhost:3000/notifications");
+    xhttp.open("DELETE", "/notifications");
     xhttp.send();
 }
 
@@ -49,7 +49,7 @@ function login() {
                             "No user found with this username. Click OK to go the signup page, or click Canel to try again"
                         )
                     ) {
-                        window.location.href = "http://localhost:3000/signup";
+                        window.location.href = "/signup";
                     }
                 } else if (this.responseText === "wrong password") {
                     alert("The password you entered is wrong, try again!");
@@ -271,7 +271,7 @@ function addreview() {
             }
         };
 
-        let rev = { review: review, rating: rating };
+        let rev = {review: review, rating: rating};
 
         xhttp.open("POST", window.location.href + "/reviews");
         xhttp.setRequestHeader("Content-Type", "application/json");

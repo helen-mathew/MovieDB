@@ -13,8 +13,7 @@ require("dotenv").config();
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 
-const mongo_uri =
-    "mongodb+srv://helen:RVayMVPaFrWYWQA1@moviedb.b6utl.mongodb.net/moviedb?retryWrites=true&w=majority";
+const mongo_uri = process.env.MONGODB_URI;
 
 //console.log(mongo_uri);
 const store = new MongoDBStore({

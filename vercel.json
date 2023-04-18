@@ -1,5 +1,5 @@
 {
     "version": 2,
-    "name": "name-of-your-vercel-app",
+    "name": "movie-db",
     "builds": [{"src": "projectserver.js.js", "use": "@vercel/node"}]
 }
